@@ -1,6 +1,17 @@
 syntax = "proto3";
 package blog;
-option go_package = "blogpb";
+
+
+
+// services
+service BlogService {
+    rpc CreateBlog(CreateBlogReq) returns (CreateBlogRes);
+    rpc ReadBlog(ReadBlogReq) returns (ReadBlogRes);
+    rpc UpdateBlog(UpdateBlogReq) returns (UpdateBlogRes);
+    rpc DeleteBlog(DeleteBlogReq) returns (DeleteBlogRes);
+    rpc ListBlogs(ListBlogRequest) returns (stream ListBlogResponse);
+}
+
 
 // messages
 message Blog {
@@ -23,7 +34,8 @@ message UpdateBlogReq {
 }
 
 message UpdateBlogRes {
-    Blog blog = 1;
+    bool success = 1;
+    string msg = 2;
 }
 
 message ReadBlogReq {
@@ -40,19 +52,11 @@ message DeleteBlogReq {
 
 message DeleteBlogRes {
     bool success = 1;
+    string msg = 2;
 }
 
-message ListBlogsRequest {}
+message ListBlogRequest {}
 
-message ListBlogsResponse {
+message ListBlogResponse {
     Blog blog = 1;
-}
-
-// services
-service BlogService {
-    rpc CreateBlog(CreateBlogReq) returns (CreateBlogRes);
-    rpc ReadBlog(ReadBlogReq) returns (ReadBlogRes);
-    rpc UpdateBlog(UpdateBlogReq) returns (UpdateBlogRes);
-    rpc DeleteBlog(DeleteBlogReq) returns (DeleteBlogRes);
-    rpc ListBlogs(ListBlogsRequest) returns (stream ListBlogsResponse);
 }

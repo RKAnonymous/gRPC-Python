@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nblog.proto\x12\x04\x62log\"E\n\x04\x42log\x12\n\n\x02id\x18\x01 \x01(\t\x12\x11\n\tauthor_id\x18\x02 \x01(\t\x12\r\n\x05title\x18\x03 \x01(\t\x12\x0f\n\x07\x63ontent\x18\x04 \x01(\t\")\n\rCreateBlogReq\x12\x18\n\x04\x62log\x18\x01 \x01(\x0b\x32\n.blog.Blog\")\n\rCreateBlogRes\x12\x18\n\x04\x62log\x18\x01 \x01(\x0b\x32\n.blog.Blog\")\n\rUpdateBlogReq\x12\x18\n\x04\x62log\x18\x01 \x01(\x0b\x32\n.blog.Blog\")\n\rUpdateBlogRes\x12\x18\n\x04\x62log\x18\x01 \x01(\x0b\x32\n.blog.Blog\"\x19\n\x0bReadBlogReq\x12\n\n\x02id\x18\x01 \x01(\t\"\'\n\x0bReadBlogRes\x12\x18\n\x04\x62log\x18\x01 \x01(\x0b\x32\n.blog.Blog\"\x1b\n\rDeleteBlogReq\x12\n\n\x02id\x18\x01 \x01(\t\" \n\rDeleteBlogRes\x12\x0f\n\x07success\x18\x01 \x01(\x08\"\x12\n\x10ListBlogsRequest\"-\n\x11ListBlogsResponse\x12\x18\n\x04\x62log\x18\x01 \x01(\x0b\x32\n.blog.Blog2\xa7\x02\n\x0b\x42logService\x12\x36\n\nCreateBlog\x12\x13.blog.CreateBlogReq\x1a\x13.blog.CreateBlogRes\x12\x30\n\x08ReadBlog\x12\x11.blog.ReadBlogReq\x1a\x11.blog.ReadBlogRes\x12\x36\n\nUpdateBlog\x12\x13.blog.UpdateBlogReq\x1a\x13.blog.UpdateBlogRes\x12\x36\n\nDeleteBlog\x12\x13.blog.DeleteBlogReq\x1a\x13.blog.DeleteBlogRes\x12>\n\tListBlogs\x12\x16.blog.ListBlogsRequest\x1a\x17.blog.ListBlogsResponse0\x01\x42\x08Z\x06\x62logpbb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nblog.proto\x12\x04\x62log\"E\n\x04\x42log\x12\n\n\x02id\x18\x01 \x01(\t\x12\x11\n\tauthor_id\x18\x02 \x01(\t\x12\r\n\x05title\x18\x03 \x01(\t\x12\x0f\n\x07\x63ontent\x18\x04 \x01(\t\")\n\rCreateBlogReq\x12\x18\n\x04\x62log\x18\x01 \x01(\x0b\x32\n.blog.Blog\")\n\rCreateBlogRes\x12\x18\n\x04\x62log\x18\x01 \x01(\x0b\x32\n.blog.Blog\")\n\rUpdateBlogReq\x12\x18\n\x04\x62log\x18\x01 \x01(\x0b\x32\n.blog.Blog\"-\n\rUpdateBlogRes\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0b\n\x03msg\x18\x02 \x01(\t\"\x19\n\x0bReadBlogReq\x12\n\n\x02id\x18\x01 \x01(\t\"\'\n\x0bReadBlogRes\x12\x18\n\x04\x62log\x18\x01 \x01(\x0b\x32\n.blog.Blog\"\x1b\n\rDeleteBlogReq\x12\n\n\x02id\x18\x01 \x01(\t\"-\n\rDeleteBlogRes\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0b\n\x03msg\x18\x02 \x01(\t\"\x11\n\x0fListBlogRequest\",\n\x10ListBlogResponse\x12\x18\n\x04\x62log\x18\x01 \x01(\x0b\x32\n.blog.Blog2\xa5\x02\n\x0b\x42logService\x12\x36\n\nCreateBlog\x12\x13.blog.CreateBlogReq\x1a\x13.blog.CreateBlogRes\x12\x30\n\x08ReadBlog\x12\x11.blog.ReadBlogReq\x1a\x11.blog.ReadBlogRes\x12\x36\n\nUpdateBlog\x12\x13.blog.UpdateBlogReq\x1a\x13.blog.UpdateBlogRes\x12\x36\n\nDeleteBlog\x12\x13.blog.DeleteBlogReq\x1a\x13.blog.DeleteBlogRes\x12<\n\tListBlogs\x12\x15.blog.ListBlogRequest\x1a\x16.blog.ListBlogResponse0\x01\x62\x06proto3')
 
 
 
@@ -27,8 +27,8 @@ _READBLOGREQ = DESCRIPTOR.message_types_by_name['ReadBlogReq']
 _READBLOGRES = DESCRIPTOR.message_types_by_name['ReadBlogRes']
 _DELETEBLOGREQ = DESCRIPTOR.message_types_by_name['DeleteBlogReq']
 _DELETEBLOGRES = DESCRIPTOR.message_types_by_name['DeleteBlogRes']
-_LISTBLOGSREQUEST = DESCRIPTOR.message_types_by_name['ListBlogsRequest']
-_LISTBLOGSRESPONSE = DESCRIPTOR.message_types_by_name['ListBlogsResponse']
+_LISTBLOGREQUEST = DESCRIPTOR.message_types_by_name['ListBlogRequest']
+_LISTBLOGRESPONSE = DESCRIPTOR.message_types_by_name['ListBlogResponse']
 Blog = _reflection.GeneratedProtocolMessageType('Blog', (_message.Message,), {
   'DESCRIPTOR' : _BLOG,
   '__module__' : 'blog_pb2'
@@ -92,25 +92,24 @@ DeleteBlogRes = _reflection.GeneratedProtocolMessageType('DeleteBlogRes', (_mess
   })
 _sym_db.RegisterMessage(DeleteBlogRes)
 
-ListBlogsRequest = _reflection.GeneratedProtocolMessageType('ListBlogsRequest', (_message.Message,), {
-  'DESCRIPTOR' : _LISTBLOGSREQUEST,
+ListBlogRequest = _reflection.GeneratedProtocolMessageType('ListBlogRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTBLOGREQUEST,
   '__module__' : 'blog_pb2'
-  # @@protoc_insertion_point(class_scope:blog.ListBlogsRequest)
+  # @@protoc_insertion_point(class_scope:blog.ListBlogRequest)
   })
-_sym_db.RegisterMessage(ListBlogsRequest)
+_sym_db.RegisterMessage(ListBlogRequest)
 
-ListBlogsResponse = _reflection.GeneratedProtocolMessageType('ListBlogsResponse', (_message.Message,), {
-  'DESCRIPTOR' : _LISTBLOGSRESPONSE,
+ListBlogResponse = _reflection.GeneratedProtocolMessageType('ListBlogResponse', (_message.Message,), {
+  'DESCRIPTOR' : _LISTBLOGRESPONSE,
   '__module__' : 'blog_pb2'
-  # @@protoc_insertion_point(class_scope:blog.ListBlogsResponse)
+  # @@protoc_insertion_point(class_scope:blog.ListBlogResponse)
   })
-_sym_db.RegisterMessage(ListBlogsResponse)
+_sym_db.RegisterMessage(ListBlogResponse)
 
 _BLOGSERVICE = DESCRIPTOR.services_by_name['BlogService']
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  DESCRIPTOR._serialized_options = b'Z\006blogpb'
   _BLOG._serialized_start=20
   _BLOG._serialized_end=89
   _CREATEBLOGREQ._serialized_start=91
@@ -120,19 +119,19 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _UPDATEBLOGREQ._serialized_start=177
   _UPDATEBLOGREQ._serialized_end=218
   _UPDATEBLOGRES._serialized_start=220
-  _UPDATEBLOGRES._serialized_end=261
-  _READBLOGREQ._serialized_start=263
-  _READBLOGREQ._serialized_end=288
-  _READBLOGRES._serialized_start=290
-  _READBLOGRES._serialized_end=329
-  _DELETEBLOGREQ._serialized_start=331
-  _DELETEBLOGREQ._serialized_end=358
-  _DELETEBLOGRES._serialized_start=360
-  _DELETEBLOGRES._serialized_end=392
-  _LISTBLOGSREQUEST._serialized_start=394
-  _LISTBLOGSREQUEST._serialized_end=412
-  _LISTBLOGSRESPONSE._serialized_start=414
-  _LISTBLOGSRESPONSE._serialized_end=459
-  _BLOGSERVICE._serialized_start=462
-  _BLOGSERVICE._serialized_end=757
+  _UPDATEBLOGRES._serialized_end=265
+  _READBLOGREQ._serialized_start=267
+  _READBLOGREQ._serialized_end=292
+  _READBLOGRES._serialized_start=294
+  _READBLOGRES._serialized_end=333
+  _DELETEBLOGREQ._serialized_start=335
+  _DELETEBLOGREQ._serialized_end=362
+  _DELETEBLOGRES._serialized_start=364
+  _DELETEBLOGRES._serialized_end=409
+  _LISTBLOGREQUEST._serialized_start=411
+  _LISTBLOGREQUEST._serialized_end=428
+  _LISTBLOGRESPONSE._serialized_start=430
+  _LISTBLOGRESPONSE._serialized_end=474
+  _BLOGSERVICE._serialized_start=477
+  _BLOGSERVICE._serialized_end=770
 # @@protoc_insertion_point(module_scope)

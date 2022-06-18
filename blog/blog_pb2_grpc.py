@@ -37,8 +37,8 @@ class BlogServiceStub(object):
                 )
         self.ListBlogs = channel.unary_stream(
                 '/blog.BlogService/ListBlogs',
-                request_serializer=blog__pb2.ListBlogsRequest.SerializeToString,
-                response_deserializer=blog__pb2.ListBlogsResponse.FromString,
+                request_serializer=blog__pb2.ListBlogRequest.SerializeToString,
+                response_deserializer=blog__pb2.ListBlogResponse.FromString,
                 )
 
 
@@ -101,8 +101,8 @@ def add_BlogServiceServicer_to_server(servicer, server):
             ),
             'ListBlogs': grpc.unary_stream_rpc_method_handler(
                     servicer.ListBlogs,
-                    request_deserializer=blog__pb2.ListBlogsRequest.FromString,
-                    response_serializer=blog__pb2.ListBlogsResponse.SerializeToString,
+                    request_deserializer=blog__pb2.ListBlogRequest.FromString,
+                    response_serializer=blog__pb2.ListBlogResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -195,7 +195,7 @@ class BlogService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_stream(request, target, '/blog.BlogService/ListBlogs',
-            blog__pb2.ListBlogsRequest.SerializeToString,
-            blog__pb2.ListBlogsResponse.FromString,
+            blog__pb2.ListBlogRequest.SerializeToString,
+            blog__pb2.ListBlogResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

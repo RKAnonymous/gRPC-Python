@@ -9,8 +9,3 @@ load_dotenv()
 MONGODB_URI = os.environ["MONGODB_URI"]
 
 client = MongoClient(MONGODB_URI)
-
-mydb = client["mydatabase"]
-print(mydb.command("serverStatus"))
-
-print(client.list_database_names())
