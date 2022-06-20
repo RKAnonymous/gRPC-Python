@@ -1,6 +1,6 @@
-
+export PYTHONPATH="$PYTHONPATH:/home/anonymous_rk/projects/gprc_project"  add project dir as PYTHONPATH
+export MONGODB_URI=...                                                    add mogodb uri as ENV PATH
 
 python3 -m grpc_tools.protoc --proto_path=../protos/ --python_out=. --grpc_python_out=. blog.proto
 
 
-export MONGODB_URI=...

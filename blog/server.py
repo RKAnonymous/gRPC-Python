@@ -1,12 +1,15 @@
 import json
-from concurrent import futures
 import time
 import logging
 import grpc
 from bson.objectid import ObjectId
+from concurrent import futures
 from db.db_connection import client
 from blog_pb2 import Blog, CreateBlogRes, UpdateBlogRes, ReadBlogRes, DeleteBlogRes, ListBlogResponse
 import blog_pb2_grpc
+
+
+_ONE_DAY_IN_SECONDS = 60*60*24
 
 
 class BlogServiceCRUD(blog_pb2_grpc.BlogServiceServicer):
@@ -15,7 +18,8 @@ class BlogServiceCRUD(blog_pb2_grpc.BlogServiceServicer):
         assert client.blog is not None, "BLOG Collection was not found!"
         return client.blog
 
-    def ListBlogs(self, request, context):
+
+    def ListBlogs(self):
         query = self.Connection()
 
         result = query.find({})
@@ -30,6 +34,7 @@ class BlogServiceCRUD(blog_pb2_grpc.BlogServiceServicer):
                 )
                 yield list_data
 
+
     def ReadBlog(self, request, context):
         query = self.Connection()
 
@@ -43,6 +48,7 @@ class BlogServiceCRUD(blog_pb2_grpc.BlogServiceServicer):
             content=data['content']
         )
 
+
     def CreateBlog(self, request, context):
         query = self.Connection()
 
@@ -54,6 +60,7 @@ class BlogServiceCRUD(blog_pb2_grpc.BlogServiceServicer):
 
         query.insert_one(data_insert)
         return CreateBlogRes(data_insert)
+
 
     def UpdateBlog(self, request, context):
         query = self.Connection()
@@ -67,6 +74,7 @@ class BlogServiceCRUD(blog_pb2_grpc.BlogServiceServicer):
         query.replace_one({"_id": ObjectId(id)}, data_update)
         return UpdateBlogRes(success=True, msg=f"Blog with ID={id} is updated.")
 
+
     def DeleteBlog(self, request, context):
         query = self.Connection()
         id = request.id
@@ -75,13 +83,13 @@ class BlogServiceCRUD(blog_pb2_grpc.BlogServiceServicer):
         return DeleteBlogRes(success=True, msg=f"Blog with ID={id} is deleted.")
 
 
-_ONE_DAY_IN_SECONDS = 60*60*24
-
 def run():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     blog_pb2_grpc.add_BlogServiceServicer_to_server(BlogServiceCRUD(), server)
-    server.add_insecure_port('0.0.0.0:44441')
+    server.add_insecure_port('0.0.0.0:50051')
     server.start()
+    server.wait_for_termination(timeout=15)
+
     try:
         while True:
             time.sleep(_ONE_DAY_IN_SECONDS)
