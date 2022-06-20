@@ -2,9 +2,10 @@ import json
 import time
 import logging
 import grpc
+from google.protobuf.json_format import MessageToJson, MessageToDict
 from bson.objectid import ObjectId
 from concurrent import futures
-from db.db_connection import client
+from db.db_connection import collection
 from blog_pb2 import Blog, CreateBlogRes, UpdateBlogRes, ReadBlogRes, DeleteBlogRes, ListBlogResponse
 import blog_pb2_grpc
 
@@ -14,72 +15,66 @@ _ONE_DAY_IN_SECONDS = 60*60*24
 
 class BlogServiceCRUD(blog_pb2_grpc.BlogServiceServicer):
 
-    def Connection(self):
-        assert client.blog is not None, "BLOG Collection was not found!"
-        return client.blog
+    def ListBlogs(self, request, context):
 
-
-    def ListBlogs(self):
-        query = self.Connection()
-
-        result = query.find({})
-
+        result = collection.find()
         for data in result:
             if data is not None:
                 list_data = ListBlogResponse(
-                    id=str(data["_id"]),
-                    author_id=data['author_id'],
-                    title=data['title'],
-                    content=data['content']
+                    blog=Blog(
+                        id=str(data["_id"]),
+                        author_id=data['author_id'],
+                        title=data['title'],
+                        content=data['content']
+                    )
                 )
                 yield list_data
 
 
     def ReadBlog(self, request, context):
-        query = self.Connection()
-
         id = request.id
-        data = query.find_one({"_id": ObjectId(id)})
+        data = collection.find_one({"_id": id})
 
-        return ReadBlogRes(
+        response = Blog(
             id=data["_id"],
             author_id=data['author_id'],
             title=data['title'],
             content=data['content']
         )
+        return ReadBlogRes(blog=response)
 
 
     def CreateBlog(self, request, context):
-        query = self.Connection()
+        data_create = MessageToDict(request)["blog"]
 
-        data_insert = dict(
-            author_id=request.author_id,
-            title=request.title,
-            content=request.content,
-        )
-
-        query.insert_one(data_insert)
-        return CreateBlogRes(data_insert)
+        collection.insert_one({
+            "_id": data_create["id"],
+            "title": data_create["title"],
+            "author_id": data_create["author_id"],
+            "content": data_create["content"]
+        })
+        return request
 
 
     def UpdateBlog(self, request, context):
-        query = self.Connection()
-        id = request.id
-        data_update = dict(
-            author_id=request.author_id,
-            title=request.title,
-            content=request.content,
+        data_update = MessageToDict(request)["blog"]
+        id = data_update.pop("id")
+        collection.replace_one(
+            {
+                "_id": id
+            },
+            {
+                "author_id": data_update["authorId"],
+                "title": data_update["title"],
+                "content": data_update["content"]
+            }
         )
-
-        query.replace_one({"_id": ObjectId(id)}, data_update)
         return UpdateBlogRes(success=True, msg=f"Blog with ID={id} is updated.")
 
 
     def DeleteBlog(self, request, context):
-        query = self.Connection()
-        id = request.id
-
-        query.delete_one({"_id": ObjectId(id)})
+        id = MessageToDict(request)["id"]
+        collection.delete_one({"_id": id})
         return DeleteBlogRes(success=True, msg=f"Blog with ID={id} is deleted.")
 
 
