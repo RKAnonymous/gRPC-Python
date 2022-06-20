@@ -2,6 +2,8 @@ import json
 import time
 import logging
 import grpc
+
+from typing import Generator
 from google.protobuf.json_format import MessageToJson, MessageToDict
 from bson.objectid import ObjectId
 from concurrent import futures
@@ -15,8 +17,7 @@ _ONE_DAY_IN_SECONDS = 60*60*24
 
 class BlogServiceCRUD(blog_pb2_grpc.BlogServiceServicer):
 
-    def ListBlogs(self, **kwargs) -> list:
-
+    def ListBlogs(self, request, context) -> Generator[ListBlogResponse]:
         result = collection.find()
         for data in result:
             if data is not None:
@@ -31,9 +32,9 @@ class BlogServiceCRUD(blog_pb2_grpc.BlogServiceServicer):
                 yield list_data
 
 
-    def ReadBlog(self, request, context):
-        id = request.id
-        data = collection.find_one({"_id": id})
+    def ReadBlog(self, request, context) -> ReadBlogRes:
+        id: str = request.id
+        data: dict = collection.find_one({"_id": id})
 
         response = Blog(
             id=data["_id"],
@@ -44,8 +45,8 @@ class BlogServiceCRUD(blog_pb2_grpc.BlogServiceServicer):
         return ReadBlogRes(blog=response)
 
 
-    def CreateBlog(self, request, context):
-        data_create = MessageToDict(request)["blog"]
+    def CreateBlog(self, request, context) -> CreateBlogRes:
+        data_create: dict = MessageToDict(request)["blog"]
 
         collection.insert_one({
             "_id": data_create["id"],
@@ -56,9 +57,9 @@ class BlogServiceCRUD(blog_pb2_grpc.BlogServiceServicer):
         return request
 
 
-    def UpdateBlog(self, request, context):
-        data_update = MessageToDict(request)["blog"]
-        id = data_update.pop("id")
+    def UpdateBlog(self, request, context) -> UpdateBlogRes:
+        data_update: dict = MessageToDict(request)["blog"]
+        id: str = data_update.pop("id")
         collection.replace_one(
             {
                 "_id": id
@@ -72,8 +73,8 @@ class BlogServiceCRUD(blog_pb2_grpc.BlogServiceServicer):
         return UpdateBlogRes(success=True, msg=f"Blog with ID={id} is updated.")
 
 
-    def DeleteBlog(self, request, context):
-        id = MessageToDict(request)["id"]
+    def DeleteBlog(self, request, context) -> DeleteBlogRes:
+        id: str = MessageToDict(request)["id"]
         collection.delete_one({"_id": id})
         return DeleteBlogRes(success=True, msg=f"Blog with ID={id} is deleted.")
 

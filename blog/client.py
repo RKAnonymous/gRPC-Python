@@ -1,7 +1,10 @@
 import grpc
 import blog_pb2
 import blog_pb2_grpc
+
+from typing import List
 from bson.objectid import ObjectId
+from google.protobuf.json_format import MessageToDict, MessageToJson
 
 
 class BlogClient(object):
@@ -10,8 +13,8 @@ class BlogClient(object):
     """
 
     def __init__(self):
-        self.host = "localhost"
-        self.port = 50051
+        self.host: str = "localhost"
+        self.port: int = 50051
 
         # instantiate channel
         self.channel = grpc.insecure_channel(f"{self.host}:{self.port}")
@@ -19,14 +22,17 @@ class BlogClient(object):
         # bind with server
         self.client = blog_pb2_grpc.BlogServiceStub(self.channel)
 
-    def get(self, id):
-        blog = blog_pb2.Blog(id=id)
-        return self.client.ReadBlog(blog)
+    def get(self, id: int) -> dict:
+        blog_pb = blog_pb2.Blog(id=id)
+        blog_data = self.client.ReadBlog(blog_pb)
+        return MessageToDict(blog_data)
 
-    def list(self):
-        return self.client.ListBlogs(blog_pb2.ListBlogRequest())
+    def list(self) -> List[dict]:
+        blog_list = self.client.ListBlogs(blog_pb2.ListBlogRequest())
+        converted_to_dict = [MessageToDict(data) for data in blog_list]
+        return converted_to_dict
 
-    def create(self, data):
+    def create(self, data: dict) -> dict:
         blog = blog_pb2.Blog(
             id=data["id"],
             author_id=data['author_id'],
@@ -34,56 +40,23 @@ class BlogClient(object):
             content=data['content']
         )
 
-        req = blog_pb2.CreateBlogReq(blog=blog)
+        blog_pb = blog_pb2.CreateBlogReq(blog=blog)
+        created_blog = self.client.CreateBlog(blog_pb)
 
-        return self.client.CreateBlog(req)
+        return MessageToDict(created_blog)
 
-    def update(self, id, data):
-        print(
-            data
-        )
+    def update(self, id: str, data: dict) -> dict:
         data["id"] = id
-        blog = blog_pb2.UpdateBlogReq(blog=data)
-        return self.client.UpdateBlog(blog)
+        blog_pb = blog_pb2.UpdateBlogReq(blog=data)
+        updated_blog = self.client.UpdateBlog(blog_pb)
+        return MessageToDict(updated_blog)
 
-    def delete(self, id):
-        request = blog_pb2.DeleteBlogReq(id=id)
-        return self.client.DeleteBlog(request)
+    def delete(self, id: str) -> dict:
+        blog_pb = blog_pb2.DeleteBlogReq(id=id)
+        deleted_blog = self.client.DeleteBlog(blog_pb)
+        return MessageToDict(deleted_blog)
 
 
 
 if __name__ == "__main__":
     client = BlogClient()
-    request = [
-        dict(
-            id='2',
-            author_id='32',
-            title="title",
-            content="content"
-        ),
-        dict(
-            id='3',
-            author_id='32',
-            title="title",
-            content="content"
-        ),
-        dict(
-            id='1',
-            author_id='32',
-            title="title",
-            content="content"
-        )
-    ]
-
-
-    # LIST = client.list()
-    # for l in LIST:
-    #     print(l)
-    # for r in request:
-    #     CREATE = client.create(r)
-    # GET = client.get('2')
-    # print(GET)
-
-    # UPDATE = client.update(id='2', data=d)
-    # print(UPDATE)
-    # DELETE = cli/

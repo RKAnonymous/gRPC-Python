@@ -12,7 +12,3 @@ client = MongoClient(MONGODB_URI)
 
 mydb  = client.blog_database
 collection = mydb.blog
-# collection.delete_one({"_id": "1"})
-# collection.delete_many({})
-# for i in collection.find():
-#     print(i)
