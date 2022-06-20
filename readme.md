@@ -1,32 +1,32 @@
 Simple CRUD gRPC server and client - Python implementation
 
 
-            Setup environment for project and activate
+1. Setup environment for project and activate
 
-1. python3 -m venv project_env
-2. source project_env/bin/activate
-
-
-            Installing required packages
-
-3. pip install -r requirements.txt
+    python3 -m venv project_env
+    source project_env/bin/activate
 
 
-            Making necessary directories as environment variables
+2. Installing required packages
 
-4. export PYTHONPATH="$PYTHONPATH:/path/to/gprc_project"
-5. export MONGODB_URI=...
-
-
-            Generate server and client side protocol code
-
-6. python3 -m grpc_tools.protoc --proto_path=../protos/ --python_out=. --grpc_python_out=. blog.proto
+    pip install -r requirements.txt
 
 
-            Running the server service
+3. Making necessary directories as environment variables
 
-7. python3 blog/server.py
+    export PYTHONPATH="$PYTHONPATH:/path/to/gprc_project"
+    export MONGODB_URI=...
 
-            Running the client service
 
-8. python3 blog/client.py
+4. Generate server and client side protocol code
+
+    python3 -m grpc_tools.protoc --proto_path=../protos/ --python_out=. --grpc_python_out=. blog.proto
+
+
+5. Running the server service
+
+    python3 blog/server.py
+
+6. Running the client service
+
+    python3 blog/client.py
