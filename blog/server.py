@@ -15,7 +15,7 @@ _ONE_DAY_IN_SECONDS = 60*60*24
 
 class BlogServiceCRUD(blog_pb2_grpc.BlogServiceServicer):
 
-    def ListBlogs(self, request, context):
+    def ListBlogs(self, **kwargs) -> list:
 
         result = collection.find()
         for data in result:
