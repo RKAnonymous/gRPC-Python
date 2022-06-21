@@ -10,6 +10,9 @@ service BlogService {
     rpc UpdateBlog(UpdateBlogReq) returns (UpdateBlogRes);
     rpc DeleteBlog(DeleteBlogReq) returns (DeleteBlogRes);
     rpc ListBlogs(ListBlogRequest) returns (stream ListBlogResponse);
+    rpc SearchBlog(SearchRequest) returns (stream SearchResponse);
+    rpc GetByID(GetByIDRequest) returns (stream GetByIDResponse);
+    rpc GetByAuthorID(GetByAuthorIDRequest) returns (GetByAuthorIDResponse);
 }
 
 
@@ -58,5 +61,30 @@ message DeleteBlogRes {
 message ListBlogRequest {}
 
 message ListBlogResponse {
+    Blog blog = 1;
+}
+
+message SearchRequest {
+    string query = 1;
+}
+
+message SearchResponse {
+    Blog blog = 1;
+    bool status = 2;
+}
+
+message GetByIDRequest {
+    string id = 1;
+}
+
+message GetByIDResponse {
+    Blog blog = 1;
+}
+
+message GetByAuthorIDRequest {
+    string author_id = 1;
+}
+
+message GetByAuthorIDResponse {
     Blog blog = 1;
 }

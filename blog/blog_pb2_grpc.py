@@ -40,6 +40,21 @@ class BlogServiceStub(object):
                 request_serializer=blog__pb2.ListBlogRequest.SerializeToString,
                 response_deserializer=blog__pb2.ListBlogResponse.FromString,
                 )
+        self.SearchBlog = channel.unary_stream(
+                '/blog.BlogService/SearchBlog',
+                request_serializer=blog__pb2.SearchRequest.SerializeToString,
+                response_deserializer=blog__pb2.SearchResponse.FromString,
+                )
+        self.GetByID = channel.unary_stream(
+                '/blog.BlogService/GetByID',
+                request_serializer=blog__pb2.GetByIDRequest.SerializeToString,
+                response_deserializer=blog__pb2.GetByIDResponse.FromString,
+                )
+        self.GetByAuthorID = channel.unary_unary(
+                '/blog.BlogService/GetByAuthorID',
+                request_serializer=blog__pb2.GetByAuthorIDRequest.SerializeToString,
+                response_deserializer=blog__pb2.GetByAuthorIDResponse.FromString,
+                )
 
 
 class BlogServiceServicer(object):
@@ -76,6 +91,24 @@ class BlogServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def SearchBlog(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetByID(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetByAuthorID(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_BlogServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -103,6 +136,21 @@ def add_BlogServiceServicer_to_server(servicer, server):
                     servicer.ListBlogs,
                     request_deserializer=blog__pb2.ListBlogRequest.FromString,
                     response_serializer=blog__pb2.ListBlogResponse.SerializeToString,
+            ),
+            'SearchBlog': grpc.unary_stream_rpc_method_handler(
+                    servicer.SearchBlog,
+                    request_deserializer=blog__pb2.SearchRequest.FromString,
+                    response_serializer=blog__pb2.SearchResponse.SerializeToString,
+            ),
+            'GetByID': grpc.unary_stream_rpc_method_handler(
+                    servicer.GetByID,
+                    request_deserializer=blog__pb2.GetByIDRequest.FromString,
+                    response_serializer=blog__pb2.GetByIDResponse.SerializeToString,
+            ),
+            'GetByAuthorID': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetByAuthorID,
+                    request_deserializer=blog__pb2.GetByAuthorIDRequest.FromString,
+                    response_serializer=blog__pb2.GetByAuthorIDResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -197,5 +245,56 @@ class BlogService(object):
         return grpc.experimental.unary_stream(request, target, '/blog.BlogService/ListBlogs',
             blog__pb2.ListBlogRequest.SerializeToString,
             blog__pb2.ListBlogResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SearchBlog(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(request, target, '/blog.BlogService/SearchBlog',
+            blog__pb2.SearchRequest.SerializeToString,
+            blog__pb2.SearchResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetByID(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(request, target, '/blog.BlogService/GetByID',
+            blog__pb2.GetByIDRequest.SerializeToString,
+            blog__pb2.GetByIDResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetByAuthorID(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/blog.BlogService/GetByAuthorID',
+            blog__pb2.GetByAuthorIDRequest.SerializeToString,
+            blog__pb2.GetByAuthorIDResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

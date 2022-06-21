@@ -3,8 +3,7 @@ import blog_pb2
 import blog_pb2_grpc
 
 from typing import List
-from bson.objectid import ObjectId
-from google.protobuf.json_format import MessageToDict, MessageToJson
+from google.protobuf.json_format import MessageToDict
 
 
 class BlogClient(object):
@@ -55,6 +54,22 @@ class BlogClient(object):
         blog_pb = blog_pb2.DeleteBlogReq(id=id)
         deleted_blog = self.client.DeleteBlog(blog_pb)
         return MessageToDict(deleted_blog)
+
+    def search(self, query: str) -> List[dict]:
+        blog_pb = blog_pb2.SearchRequest(query=query)
+        search_blog = self.client.SearchBlog(blog_pb)
+        converted_to_dict = [MessageToDict(data) for data in search_blog]
+        return converted_to_dict
+
+    def get_by_id(self, id: str):
+        blog_pb = blog_pb2.GetByIDRequest(id=id)
+        data = self.client.GetByID(blog_pb)
+        return data
+
+    def get_by_author_id(self, author_id):
+        blog_pb = blog_pb2.GetByAuthorIDRequest(author_id=author_id)
+        data = self.client.GetByAuthorID(blog_pb)
+        return data
 
 
 

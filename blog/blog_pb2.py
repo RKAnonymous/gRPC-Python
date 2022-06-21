@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nblog.proto\x12\x04\x62log\"E\n\x04\x42log\x12\n\n\x02id\x18\x01 \x01(\t\x12\x11\n\tauthor_id\x18\x02 \x01(\t\x12\r\n\x05title\x18\x03 \x01(\t\x12\x0f\n\x07\x63ontent\x18\x04 \x01(\t\")\n\rCreateBlogReq\x12\x18\n\x04\x62log\x18\x01 \x01(\x0b\x32\n.blog.Blog\")\n\rCreateBlogRes\x12\x18\n\x04\x62log\x18\x01 \x01(\x0b\x32\n.blog.Blog\")\n\rUpdateBlogReq\x12\x18\n\x04\x62log\x18\x01 \x01(\x0b\x32\n.blog.Blog\"-\n\rUpdateBlogRes\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0b\n\x03msg\x18\x02 \x01(\t\"\x19\n\x0bReadBlogReq\x12\n\n\x02id\x18\x01 \x01(\t\"\'\n\x0bReadBlogRes\x12\x18\n\x04\x62log\x18\x01 \x01(\x0b\x32\n.blog.Blog\"\x1b\n\rDeleteBlogReq\x12\n\n\x02id\x18\x01 \x01(\t\"-\n\rDeleteBlogRes\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0b\n\x03msg\x18\x02 \x01(\t\"\x11\n\x0fListBlogRequest\",\n\x10ListBlogResponse\x12\x18\n\x04\x62log\x18\x01 \x01(\x0b\x32\n.blog.Blog2\xa5\x02\n\x0b\x42logService\x12\x36\n\nCreateBlog\x12\x13.blog.CreateBlogReq\x1a\x13.blog.CreateBlogRes\x12\x30\n\x08ReadBlog\x12\x11.blog.ReadBlogReq\x1a\x11.blog.ReadBlogRes\x12\x36\n\nUpdateBlog\x12\x13.blog.UpdateBlogReq\x1a\x13.blog.UpdateBlogRes\x12\x36\n\nDeleteBlog\x12\x13.blog.DeleteBlogReq\x1a\x13.blog.DeleteBlogRes\x12<\n\tListBlogs\x12\x15.blog.ListBlogRequest\x1a\x16.blog.ListBlogResponse0\x01\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nblog.proto\x12\x04\x62log\"E\n\x04\x42log\x12\n\n\x02id\x18\x01 \x01(\t\x12\x11\n\tauthor_id\x18\x02 \x01(\t\x12\r\n\x05title\x18\x03 \x01(\t\x12\x0f\n\x07\x63ontent\x18\x04 \x01(\t\")\n\rCreateBlogReq\x12\x18\n\x04\x62log\x18\x01 \x01(\x0b\x32\n.blog.Blog\")\n\rCreateBlogRes\x12\x18\n\x04\x62log\x18\x01 \x01(\x0b\x32\n.blog.Blog\")\n\rUpdateBlogReq\x12\x18\n\x04\x62log\x18\x01 \x01(\x0b\x32\n.blog.Blog\"-\n\rUpdateBlogRes\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0b\n\x03msg\x18\x02 \x01(\t\"\x19\n\x0bReadBlogReq\x12\n\n\x02id\x18\x01 \x01(\t\"\'\n\x0bReadBlogRes\x12\x18\n\x04\x62log\x18\x01 \x01(\x0b\x32\n.blog.Blog\"\x1b\n\rDeleteBlogReq\x12\n\n\x02id\x18\x01 \x01(\t\"-\n\rDeleteBlogRes\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0b\n\x03msg\x18\x02 \x01(\t\"\x11\n\x0fListBlogRequest\",\n\x10ListBlogResponse\x12\x18\n\x04\x62log\x18\x01 \x01(\x0b\x32\n.blog.Blog\"\x1e\n\rSearchRequest\x12\r\n\x05query\x18\x01 \x01(\t\":\n\x0eSearchResponse\x12\x18\n\x04\x62log\x18\x01 \x01(\x0b\x32\n.blog.Blog\x12\x0e\n\x06status\x18\x02 \x01(\x08\"\x1c\n\x0eGetByIDRequest\x12\n\n\x02id\x18\x01 \x01(\t\"+\n\x0fGetByIDResponse\x12\x18\n\x04\x62log\x18\x01 \x01(\x0b\x32\n.blog.Blog\")\n\x14GetByAuthorIDRequest\x12\x11\n\tauthor_id\x18\x01 \x01(\t\"1\n\x15GetByAuthorIDResponse\x12\x18\n\x04\x62log\x18\x01 \x01(\x0b\x32\n.blog.Blog2\xe4\x03\n\x0b\x42logService\x12\x36\n\nCreateBlog\x12\x13.blog.CreateBlogReq\x1a\x13.blog.CreateBlogRes\x12\x30\n\x08ReadBlog\x12\x11.blog.ReadBlogReq\x1a\x11.blog.ReadBlogRes\x12\x36\n\nUpdateBlog\x12\x13.blog.UpdateBlogReq\x1a\x13.blog.UpdateBlogRes\x12\x36\n\nDeleteBlog\x12\x13.blog.DeleteBlogReq\x1a\x13.blog.DeleteBlogRes\x12<\n\tListBlogs\x12\x15.blog.ListBlogRequest\x1a\x16.blog.ListBlogResponse0\x01\x12\x39\n\nSearchBlog\x12\x13.blog.SearchRequest\x1a\x14.blog.SearchResponse0\x01\x12\x38\n\x07GetByID\x12\x14.blog.GetByIDRequest\x1a\x15.blog.GetByIDResponse0\x01\x12H\n\rGetByAuthorID\x12\x1a.blog.GetByAuthorIDRequest\x1a\x1b.blog.GetByAuthorIDResponseb\x06proto3')
 
 
 
@@ -29,6 +29,12 @@ _DELETEBLOGREQ = DESCRIPTOR.message_types_by_name['DeleteBlogReq']
 _DELETEBLOGRES = DESCRIPTOR.message_types_by_name['DeleteBlogRes']
 _LISTBLOGREQUEST = DESCRIPTOR.message_types_by_name['ListBlogRequest']
 _LISTBLOGRESPONSE = DESCRIPTOR.message_types_by_name['ListBlogResponse']
+_SEARCHREQUEST = DESCRIPTOR.message_types_by_name['SearchRequest']
+_SEARCHRESPONSE = DESCRIPTOR.message_types_by_name['SearchResponse']
+_GETBYIDREQUEST = DESCRIPTOR.message_types_by_name['GetByIDRequest']
+_GETBYIDRESPONSE = DESCRIPTOR.message_types_by_name['GetByIDResponse']
+_GETBYAUTHORIDREQUEST = DESCRIPTOR.message_types_by_name['GetByAuthorIDRequest']
+_GETBYAUTHORIDRESPONSE = DESCRIPTOR.message_types_by_name['GetByAuthorIDResponse']
 Blog = _reflection.GeneratedProtocolMessageType('Blog', (_message.Message,), {
   'DESCRIPTOR' : _BLOG,
   '__module__' : 'blog_pb2'
@@ -106,6 +112,48 @@ ListBlogResponse = _reflection.GeneratedProtocolMessageType('ListBlogResponse', 
   })
 _sym_db.RegisterMessage(ListBlogResponse)
 
+SearchRequest = _reflection.GeneratedProtocolMessageType('SearchRequest', (_message.Message,), {
+  'DESCRIPTOR' : _SEARCHREQUEST,
+  '__module__' : 'blog_pb2'
+  # @@protoc_insertion_point(class_scope:blog.SearchRequest)
+  })
+_sym_db.RegisterMessage(SearchRequest)
+
+SearchResponse = _reflection.GeneratedProtocolMessageType('SearchResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SEARCHRESPONSE,
+  '__module__' : 'blog_pb2'
+  # @@protoc_insertion_point(class_scope:blog.SearchResponse)
+  })
+_sym_db.RegisterMessage(SearchResponse)
+
+GetByIDRequest = _reflection.GeneratedProtocolMessageType('GetByIDRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETBYIDREQUEST,
+  '__module__' : 'blog_pb2'
+  # @@protoc_insertion_point(class_scope:blog.GetByIDRequest)
+  })
+_sym_db.RegisterMessage(GetByIDRequest)
+
+GetByIDResponse = _reflection.GeneratedProtocolMessageType('GetByIDResponse', (_message.Message,), {
+  'DESCRIPTOR' : _GETBYIDRESPONSE,
+  '__module__' : 'blog_pb2'
+  # @@protoc_insertion_point(class_scope:blog.GetByIDResponse)
+  })
+_sym_db.RegisterMessage(GetByIDResponse)
+
+GetByAuthorIDRequest = _reflection.GeneratedProtocolMessageType('GetByAuthorIDRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETBYAUTHORIDREQUEST,
+  '__module__' : 'blog_pb2'
+  # @@protoc_insertion_point(class_scope:blog.GetByAuthorIDRequest)
+  })
+_sym_db.RegisterMessage(GetByAuthorIDRequest)
+
+GetByAuthorIDResponse = _reflection.GeneratedProtocolMessageType('GetByAuthorIDResponse', (_message.Message,), {
+  'DESCRIPTOR' : _GETBYAUTHORIDRESPONSE,
+  '__module__' : 'blog_pb2'
+  # @@protoc_insertion_point(class_scope:blog.GetByAuthorIDResponse)
+  })
+_sym_db.RegisterMessage(GetByAuthorIDResponse)
+
 _BLOGSERVICE = DESCRIPTOR.services_by_name['BlogService']
 if _descriptor._USE_C_DESCRIPTORS == False:
 
@@ -132,6 +180,18 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _LISTBLOGREQUEST._serialized_end=428
   _LISTBLOGRESPONSE._serialized_start=430
   _LISTBLOGRESPONSE._serialized_end=474
-  _BLOGSERVICE._serialized_start=477
-  _BLOGSERVICE._serialized_end=770
+  _SEARCHREQUEST._serialized_start=476
+  _SEARCHREQUEST._serialized_end=506
+  _SEARCHRESPONSE._serialized_start=508
+  _SEARCHRESPONSE._serialized_end=566
+  _GETBYIDREQUEST._serialized_start=568
+  _GETBYIDREQUEST._serialized_end=596
+  _GETBYIDRESPONSE._serialized_start=598
+  _GETBYIDRESPONSE._serialized_end=641
+  _GETBYAUTHORIDREQUEST._serialized_start=643
+  _GETBYAUTHORIDREQUEST._serialized_end=684
+  _GETBYAUTHORIDRESPONSE._serialized_start=686
+  _GETBYAUTHORIDRESPONSE._serialized_end=735
+  _BLOGSERVICE._serialized_start=738
+  _BLOGSERVICE._serialized_end=1222
 # @@protoc_insertion_point(module_scope)
